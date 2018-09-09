@@ -20,7 +20,14 @@ class MyPictureList extends Component {
 	makePayment() {
 		fetch('http://localhost:5000/api/makepayment',
 		{
-				method: 'post'
+			method: 'post'
+		})
+		.then(res => {
+			return res.json();
+		  })
+		.then((resp) => {
+			console.log(resp);
+			window.location = resp.url;
 		});
 	}
 

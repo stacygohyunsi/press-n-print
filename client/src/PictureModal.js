@@ -6,14 +6,9 @@ import { changeModalStatus } from './actions/modal';
 import { saveCroppedImage } from './actions/pictures';
 
 const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
+	content : {
+		'textAlign':'center'
+	}
 };
 
 class PictureModal extends Component {

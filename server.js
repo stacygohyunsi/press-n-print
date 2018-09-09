@@ -20,6 +20,13 @@ AWS.config.update({
 
 var s3 = new AWS.S3();
 
+// Allow cors
+app.use(function (req, res, next) {
+    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+	res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+	next();
+});
+
 app.get('/api/hello', (req, res) => {
   res.send({ express: 'Hello From Express' });
 });
@@ -47,7 +54,6 @@ app.post('/api/upload', type, function (req, res) {
 });
 
 app.post('/api/makepayment', (req, res) => {
-	console.log('test');
 	var payReq = JSON.stringify({
 		intent:'sale',
 		payer:{
@@ -82,9 +88,8 @@ app.post('/api/makepayment', (req, res) => {
 			// If the redirect URL is present, redirect the customer to that URL
 			if (links.hasOwnProperty('approval_url')){
 				// Redirect the customer to links['approval_url'].href
-
 				console.log('yes has approval url', links['approval_url'].href);
-				res.redirect(links['approval_url'].href);
+				res.json({url: links['approval_url'].href});
 			} else {
 				console.error('no redirect URI present');
 			}
