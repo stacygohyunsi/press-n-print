@@ -17,7 +17,7 @@ class ThankYouInfo extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className='ThankYouMessage'>
 				<div>Thank you!</div>
 				<div>Expect your delivery to arrive in 5-7 days.</div>
 			</div>
