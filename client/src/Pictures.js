@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { connect } from 'react-redux';
 import queryString from 'query-string';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import update from 'immutability-helper';
 import { 
   SAVE_PICTURES
@@ -22,7 +22,7 @@ class Pictures extends Component {
       headers: {
         'Content-type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
-      body: `client_id=700c80600a8040cda30166ee4e4f8cc2&client_secret=07bf8aee35a04aab9034aaecfd758c28&grant_type=authorization_code&redirect_uri=https://snapnprint.sg&code=${params.code}`
+      body: `client_id=700c80600a8040cda30166ee4e4f8cc2&client_secret=07bf8aee35a04aab9034aaecfd758c28&grant_type=authorization_code&redirect_uri=http://localhost:3000/pictures&code=${params.code}`
     })
     .then(res => {
       return res.json();
@@ -58,8 +58,10 @@ class Pictures extends Component {
   render() {
     return (
       <div className="App">
+        <Link to ='/cropping'>
+          <button className='modalButton'>Next</button>
+        </Link>
         <Gallery images={this.props.pictures} onSelectImage={(index, image) => this.selectPicturesToCrop(image)}/>
-        <Link to ='/cropping'>Next</Link>
       </div>
     );
   }
