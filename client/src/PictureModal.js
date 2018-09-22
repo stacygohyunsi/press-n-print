@@ -34,9 +34,13 @@ class PictureModal extends Component {
 	onClickSave = () => {
     if (this.editor) {
 			const canvas = this.editor.getImage();
-			const canvas2 = this.editor.getImage().toDataURL('image/png', 1);
-			console.log('CANVAS', canvas);
+			const canvas2 = this.editor.getImage().toDataURL('image/png');
+			console.log('CANVAS', canvas2);
 			this.props.saveCroppedImage(canvas2, this.props.selectedPicture);
+			canvas.toBlob(file => {
+				file.name = 'test';
+				console.log(file);
+			}, 'image/jpeg');
 			this.props.changeModalStatus('close');
 			// this.setState({preview: canvas});
 			// var fd = new FormData();

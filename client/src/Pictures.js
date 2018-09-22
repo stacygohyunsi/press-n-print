@@ -37,13 +37,25 @@ class Pictures extends Component {
       .then(resp => {
         console.log(resp);
         let pictureArray = [];
-        resp.data.forEach((picture) => {
-          pictureArray.push({
-            src: picture.images.standard_resolution.url,
-            thumbnail: picture.images.standard_resolution.url,
-            isSelected: false
+        if (resp.data) {
+          console.log(resp.data);
+          resp.data.forEach((picture) => {
+            if (picture.carousel_media) {
+              picture.carousel_media.forEach((carouselPicture) => {
+                pictureArray.push({
+                  src: carouselPicture.images.standard_resolution.url,
+                  thumbnail: carouselPicture.images.standard_resolution.url,
+                  isSelected: false
+                })
+              })
+            }
+            pictureArray.push({
+              src: picture.images.standard_resolution.url,
+              thumbnail: picture.images.standard_resolution.url,
+              isSelected: false
+            })
           })
-        })
+        }
         this.props.saveSelectedPictures(pictureArray);
       });
     });
@@ -58,10 +70,17 @@ class Pictures extends Component {
   render() {
     return (
       <div className="App">
-        <Link to ='/cropping'>
-          <button className='modalButton'>Next</button>
-        </Link>
-        <Gallery images={this.props.pictures} onSelectImage={(index, image) => this.selectPicturesToCrop(image)}/>
+        <div className='fixedCustomHeader'>
+          <ul>
+            <li>Choose photos to print:</li>
+            <Link className='nextButtonWrapper' to ='/cropping'>
+              <button className='nextButton'>Next</button>
+            </Link>
+          </ul>
+        </div>
+        <div className='content'>
+          <Gallery images={this.props.pictures} onSelectImage={(index, image) => this.selectPicturesToCrop(image)}/>
+        </div>
       </div>
     );
   }

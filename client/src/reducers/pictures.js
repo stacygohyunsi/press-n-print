@@ -10,6 +10,7 @@ export function pictures(state = INITIAL_STATE, action) {
 		case 'SELECTED_PICTURE_TO_EDIT':
 			return {...state, selectedPicture: action.selectedPicture}
 		case 'SAVE_CROPPED_IMAGE':
+		console.log(action.newUrl);
 			return { 
 				...state, 
 				pictures: state.pictures.map(

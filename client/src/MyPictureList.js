@@ -4,6 +4,7 @@ import { changeModalStatus } from './actions/modal';
 import { selectPhotoToEdit } from './actions/pictures';
 import { connect } from 'react-redux';
 import PictureModal from './PictureModal';
+import { Link } from 'react-router-dom';
 
 class MyPictureList extends Component {
   constructor(props) {
@@ -34,18 +35,27 @@ class MyPictureList extends Component {
 	render() {
 		return (
 			<div>
-				{this.props.pictures.map((picture) => {
-					return picture.isSelected === true ? 
-						<div key={picture.src}>
-							<img className="imageGrid" onClick={() => this.openModal(picture.src)} src={picture.updatedUrl || picture.src}/>
-						</div>
-						:
-						<div></div>
-				})}
+				<div className='fixedCustomHeader'>
+					<ul>
+						<li>Click on your photo to crop/resize:</li>
+						<Link className='nextButtonWrapper' to ='/address'>
+							<button className='nextButton'>Proceed</button>
+						</Link>
+					</ul>
+				</div>
+				<div className='gallery'>
+					{this.props.pictures.map((picture) => {
+						return picture.isSelected === true ? 
+							<div key={picture.src}>
+								<img className="imageGrid" onClick={() => this.openModal(picture.src)} src={picture.updatedUrl || picture.src}/>
+							</div>
+							:
+							<div className='none'></div>
+					})}
+				</div>
 				<PictureModal	/>
-				<button onClick={this.makePayment}>Proceed to payment</button>
 			</div>
-		)				
+		)
 	}
 }
 

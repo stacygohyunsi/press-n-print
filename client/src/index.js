@@ -5,6 +5,7 @@ import { Provider } from 'react-redux';
 import Main from './Main';
 import Pictures from './Pictures';
 import MyPictureList from './MyPictureList';
+import Address from './Address';
 import ThankYouInfo from './ThankYouInfo';
 import store, { history } from './store';
 
@@ -20,6 +21,7 @@ const App = () => (
         <Route exact path="/pictures" component={Pictures} />
         <Route exact path="/cropping" component={MyPictureList} />
         <Route exact path="/success" component={ThankYouInfo} />        
+        <Route exact path="/address" component={Address} />        
       </div>
     </BrowserRouter>
   </Provider>
